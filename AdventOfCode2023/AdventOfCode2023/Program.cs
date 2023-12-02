@@ -16,8 +16,15 @@ Consider your entire calibration document. What is the sum of all of the calibra
  * 
  * 
  */
+using AdventOfCode2023;
+
 List<string> input = new List<string>(await File.ReadAllLinesAsync("input.txt").ConfigureAwait(false));
+int sum = 0;
 foreach (string line in input)
 {
-    Console.WriteLine(line);
+    (char First, char Second) result = Day1.ExtractNumbers(line);
+    int numberVal = Day1.ConvertDigitsToCombinedNumber(result.First, result.Second);
+    sum += numberVal;
 }
+
+Console.WriteLine($"Final sum is {sum}");
