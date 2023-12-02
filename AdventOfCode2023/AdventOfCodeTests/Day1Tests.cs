@@ -2,7 +2,6 @@
 namespace AdventOfCodeTests;
 
 using AdventOfCode2023;
-using System.Runtime.CompilerServices;
 
 [TestClass]
 public class Day1Tests
@@ -62,9 +61,53 @@ public class Day1Tests
     [DataRow('1', '2', 12)]
     [DataRow('3', '8', 38)]
     [DataRow('7', '7', 77)]
-    public void ConvertDigitsToCombinedNumber_WithValidNumbers_ReturnsCorrectNumber(char first, char second, int expected)
-    {
+    public void ConvertDigitsToCombinedNumber_WithValidNumbers_ReturnsCorrectNumber(char first, char second, int expected) =>
         Assert.AreEqual(Day1.ConvertDigitsToCombinedNumber(first, second), expected);
-    }
 
+    [TestMethod]
+    [DataRow("two1nine", 3, '1', '2')]
+    [DataRow("eighttwothree", 13, '0', '8')]
+    [DataRow("abcone2threexyz", 6, '2', '1')]
+    [DataRow("xtwone3four", 6, '3', '2')]
+    [DataRow("4nineeightseven2", 0, '4', '4')]
+    [DataRow("zoneight234", 8, '2', '1')]
+    [DataRow("7pqrstsixteen", 0, '7', '7')]
+    [DataRow("12432", 0, '1', '1')]
+
+    public void GetTrueFirstOccurringDigit_WithVaryingStrings_ReturnsCorrectNumber(string original, int index, char val, char expected) =>
+        Assert.AreEqual(Day1.GetTrueFirstOccurringDigit(original, index, val), expected);
+
+    [TestMethod]
+    [DataRow("two1nine", 3, '1', '9')]
+    [DataRow("eighttwothree", -1, '0', '3')]
+    [DataRow("abcone2threexyz", 6, '2', '3')]
+    [DataRow("xtwone3four", 6, '3', '4')]
+    [DataRow("4nineeightseven2", 15, '2', '2')]
+    [DataRow("zoneight234", 10, '4', '4')]
+    [DataRow("7pqrstsixteen", 0, '7', '6')]
+    [DataRow("123", 2, '2', '2')]
+    public void GetTrueLastOcurringDigit_WithVaryingStrings_ReturnsCorrectNumber(string original, int index, char val, char expected) =>
+        Assert.AreEqual(Day1.GetTrueLastOccurringDigit(original, index, val), expected);
+
+    [TestMethod]
+    [DataRow("two1nine", '2', '9')]
+    [DataRow("eightwothree", '8', '3')]
+    [DataRow("abcone2threexyz", '1', '3')]
+    [DataRow("xtwone3four", '2', '4')]
+    [DataRow("4nineeightseven2", '4', '2')]
+    [DataRow("zoneight234", '1', '4')]
+    [DataRow("7pqrstsixteen", '7', '6')]
+    [DataRow("eightwo", '8', '2')]
+    [DataRow("oneight", '1', '8')]
+    [DataRow("threeight", '3', '8')]
+    [DataRow("fiveight", '5', '8')]
+    [DataRow("sevenine", '7', '9')]
+    [DataRow("twone", '2', '1')]
+    [DataRow("2bk", '2', '2')]
+    public void ExtractNumbersP2_WithSampleValues_ReturnsExpectedNumber(string original, char expectedFirst, char expectedSecond)
+    {
+        (char first, char second) result = Day1.ExtractNumbersP2(original);
+        Assert.AreEqual(expectedFirst, result.first);
+        Assert.AreEqual(expectedSecond, result.second);
+    }
 }

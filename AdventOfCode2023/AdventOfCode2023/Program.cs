@@ -22,9 +22,8 @@ List<string> input = new List<string>(await File.ReadAllLinesAsync("input.txt").
 int sum = 0;
 foreach (string line in input)
 {
-    (char First, char Second) result = Day1.ExtractNumbers(line);
-    int numberVal = Day1.ConvertDigitsToCombinedNumber(result.First, result.Second);
-    sum += numberVal;
+    (char First, char Second) result = Day1.ExtractNumbersP2(line);
+    sum += Day1.ConvertDigitsToCombinedNumber(result.First, result.Second);
 }
 
 Console.WriteLine($"Final sum is {sum}");
