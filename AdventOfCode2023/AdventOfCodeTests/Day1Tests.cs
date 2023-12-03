@@ -53,7 +53,7 @@ public class Day1Tests
     [TestMethod]
     public async Task InputFile_AllValues_ContainAtLeastOneNumber()
     {
-        List<string> input = new(await File.ReadAllLinesAsync("input.txt").ConfigureAwait(false));
+        List<string> input = new(await File.ReadAllLinesAsync("day1input.txt").ConfigureAwait(false));
         Assert.IsTrue(Day1.DoAllInputHaveAtLeastOneDigit(input));
     }
 
@@ -104,6 +104,7 @@ public class Day1Tests
     [DataRow("sevenine", '7', '9')]
     [DataRow("twone", '2', '1')]
     [DataRow("2bk", '2', '2')]
+    [DataRow("voneightznktfvmxlhnine1seven4z", '1', '4')]
     public void ExtractNumbersP2_WithSampleValues_ReturnsExpectedNumber(string original, char expectedFirst, char expectedSecond)
     {
         (char first, char second) result = Day1.ExtractNumbersP2(original);

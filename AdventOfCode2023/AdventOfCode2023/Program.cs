@@ -18,12 +18,24 @@ Consider your entire calibration document. What is the sum of all of the calibra
  */
 using AdventOfCode2023;
 
-List<string> input = new List<string>(await File.ReadAllLinesAsync("input.txt").ConfigureAwait(false));
-int sum = 0;
-foreach (string line in input)
-{
-    (char First, char Second) result = Day1.ExtractNumbersP2(line);
-    sum += Day1.ConvertDigitsToCombinedNumber(result.First, result.Second);
-}
+// Day 1
+//List<string> input = new List<string>(await File.ReadAllLinesAsync("day1input.txt").ConfigureAwait(false));
+//int sum = 0;
+//foreach (string line in input)
+//{
+//    (char First, char Second) result = Day1.ExtractNumbersP2(line);
+//    sum += Day1.ConvertDigitsToCombinedNumber(result.First, result.Second);
+//}
 
-Console.WriteLine($"Final sum is {sum}");
+//Console.WriteLine($"Final sum is {sum}");
+
+// Day 2
+List<string> input = new List<string>(await File.ReadAllLinesAsync("day2input.txt").ConfigureAwait(false));
+Console.WriteLine(Day2.SumIDsOfValidGames(input));
+int partTwoSum = 0;
+List<SetOfCubes> minSetsOfCubes = Day2.GetMinPossibleSetOfCubesPerGame(input);
+foreach (SetOfCubes set in minSetsOfCubes)
+{
+    partTwoSum += (set.Red * set.Green * set.Blue);
+}
+Console.WriteLine($"Sum for part two is {partTwoSum}");
