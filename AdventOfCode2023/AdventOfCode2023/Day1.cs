@@ -52,45 +52,8 @@ public static class Day1
         return (first, second.Value);
     }
 
-    public static (char First, char Second) ExtractNumbersP2(string input)
-    {
-        char[] charArray = input.ToCharArray();
-        (char charVal, int Index)? first = null;
-        (char charVal, int Index)? second = null;
-        for (int i = 0; i < input.Length; ++i)
-        {
-            if (IsCharacterSingleDigit(charArray[i]))
-            {
-                first = (charArray[i], i);
-                break;
-            }
-        }
-
-        for (int i = input.Length - 1; i >= 0; --i)
-        {
-            if (IsCharacterSingleDigit(charArray[i]))
-            {
-                second = (charArray[i], i);
-                break;
-            }
-        }
-
-        if (first == null)
-        {
-            first = ('0', input.Length);
-        }
-
-        if (second == null)
-        {
-            second = ('0', -1);
-        }
-
-        char trueFirst = GetTrueFirstOccurringDigit(input, first.Value.Index, first.Value.charVal);
-        char trueLast = GetTrueLastOccurringDigit(input, second.Value.Index, second.Value.charVal);
-
-        return (trueFirst, trueLast);
-    }
-
+    public static (char First, char Second) ExtractNumbersP2(string input) =>
+        ExtractNumbers(RewriteLine(input));
     public static char GetTrueFirstOccurringDigit(string originalLine, int indexOfFirstOccurringNumber, char valOfNumber)
     {
         Dictionary<int, char> letterDigits = GetMatchesToTextDigits(originalLine);
@@ -168,4 +131,21 @@ public static class Day1
 
         return matches;
     }
+
+    private static string RewriteLine(string line) => line
+    .Replace("eightwo", "82")
+    .Replace("oneight", "18")
+    .Replace("threeight", "38")
+    .Replace("fiveight", "58")
+    .Replace("sevenine", "79")
+    .Replace("twone", "21")
+    .Replace("one", "1")
+    .Replace("two", "2")
+    .Replace("three", "3")
+    .Replace("four", "4")
+    .Replace("five", "5")
+    .Replace("six", "6")
+    .Replace("seven", "7")
+    .Replace("eight", "8")
+    .Replace("nine", "9");
 }
