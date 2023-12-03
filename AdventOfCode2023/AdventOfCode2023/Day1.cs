@@ -54,38 +54,6 @@ public static class Day1
 
     public static (char First, char Second) ExtractNumbersP2(string input) =>
         ExtractNumbers(RewriteLine(input));
-    public static char GetTrueFirstOccurringDigit(string originalLine, int indexOfFirstOccurringNumber, char valOfNumber)
-    {
-        Dictionary<int, char> letterDigits = GetMatchesToTextDigits(originalLine);
-        if (letterDigits.Count == 0)
-        {
-            return valOfNumber;
-        }
-
-        int minIndex = letterDigits.Min(x => x.Key);
-        if (minIndex < indexOfFirstOccurringNumber)
-        {
-            return letterDigits[minIndex];
-        }
-
-        return valOfNumber;
-    }
-
-    public static char GetTrueLastOccurringDigit(string originalLine, int indexOfLastOccurringNumber, char valOfNumber)
-    {
-        Dictionary<int, char> letterDigits = GetMatchesToTextDigits(originalLine);
-        if (letterDigits.Count == 0)
-        {
-            return valOfNumber;
-        }
-        int maxIndex = letterDigits.Max(x => x.Key);
-        if (maxIndex > indexOfLastOccurringNumber)
-        {
-            return letterDigits[maxIndex];
-        }
-
-        return valOfNumber;
-    }
 
     public static int ConvertDigitsToCombinedNumber(char first, char second)
     {
@@ -115,21 +83,6 @@ public static class Day1
         }
 
         return true;
-    }
-
-    private static Dictionary<int, char> GetMatchesToTextDigits(string line)
-    {
-        Dictionary<int, char> matches = new();
-        foreach (var kvp in NumberStrings)
-        {
-            int index = line.ToLower().IndexOf(kvp.Key);
-            if (index != -1)
-            {
-                matches.Add(index, kvp.Value);
-            }
-        }
-
-        return matches;
     }
 
     private static string RewriteLine(string line) => line
