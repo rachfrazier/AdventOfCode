@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AdventOfCode2023;
+﻿namespace AdventOfCode2023;
 
 public static class Day3
 {
@@ -13,8 +7,12 @@ public static class Day3
 
     private static char[] Digits = new char[]{ '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
 
+    // third is number
+    private static Dictionary<(string Line, int PositionIndex), List<int>> GearsNearNumbers = new();
+
     public static int SumPartNumbers(List<string> lines)
     {
+        GearsNearNumbers.Clear();
         int sum = 0;
         for(int i = 0; i < lines.Count(); ++i)
         {
@@ -26,6 +24,22 @@ public static class Day3
 
         return sum;
     }
+
+    public static int SumGearNumbers(List<string> lines)
+    {
+        SumPartNumbers(lines);
+        int sum = 0;
+        foreach (var entry in GearsNearNumbers)
+        {
+            if (entry.Value.Count > 1)
+            {
+                sum += entry.Value.Aggregate((x, y) => x * y);
+            }
+        }
+        return sum;
+    }
+
+    internal static bool ContainsGear(this string line) => line.Contains('*');
 
     internal static int GetSumPartNumbersOfLine(string? previousLine, string currentLine, string? nextLine)
     {
@@ -67,44 +81,86 @@ public static class Day3
 
     internal static bool IsNumberAPartNumber(string? previousLine, string currentLine, string? nextLine, int startIndex, int endIndex)
     {
-        if (previousLine != null && 
-            DoesAdjacentLineContainSymbol(
+        bool hasSymbol = false;
+        int numberVal = int.Parse(currentLine.Substring(startIndex, endIndex + 1 - startIndex));
+        if (previousLine != null)
+        {
+            (bool hasSymbol, int? gearIndex) result = DoesAdjacentLineContainSymbol(
                 previousLine,
                 startIndex == 0 ? 0 : startIndex - 1,
-                endIndex == previousLine.Length - 1 ? endIndex : endIndex + 1))
-        {
-            return true;
+                endIndex == previousLine.Length - 1 ? endIndex : endIndex + 1);
+            if (result.hasSymbol)
+            {
+                hasSymbol = true;
+                if (result.gearIndex != null)
+                {
+                    AddToExistingOrCreateNewToDictionary(previousLine, result.gearIndex.Value, numberVal);
+                }
+            }
         }
         if (startIndex - 1 > 0 && Symbols.Contains(currentLine[startIndex - 1]))
         {
-            return true;
+            if (currentLine[startIndex - 1] == '*')
+            {
+                AddToExistingOrCreateNewToDictionary(currentLine, startIndex - 1, numberVal);
+            }
+            hasSymbol = true;
         } 
         if (endIndex + 1 < currentLine.Length - 1 && Symbols.Contains(currentLine[endIndex + 1]))
         {
-            return true;
+            if (currentLine[endIndex + 1] == '*')
+            {
+                AddToExistingOrCreateNewToDictionary(currentLine, endIndex + 1, numberVal);
+            }
+            hasSymbol = true;
         }
-        if (nextLine != null &&
-            DoesAdjacentLineContainSymbol(
+        if (nextLine != null)
+        {
+            (bool hasSymbol, int? gearIndex) result = DoesAdjacentLineContainSymbol(
                 nextLine,
                 startIndex == 0 ? 0 : startIndex - 1,
-                endIndex == nextLine.Length - 1 ? endIndex : endIndex + 1))
-        {
-            return true;
+                endIndex == nextLine.Length - 1 ? endIndex : endIndex + 1);
+            if (result.hasSymbol)
+            {
+                hasSymbol = true;
+                if (result.gearIndex != null)
+                {
+                    AddToExistingOrCreateNewToDictionary(nextLine, result.gearIndex.Value, numberVal);
+                }
+            }
         }
 
-        return false;
+        return hasSymbol;
     }
 
-    internal static bool DoesAdjacentLineContainSymbol(string line, int startIndex, int endIndex)
+    internal static (bool HasSymbol, int? GearIndex) DoesAdjacentLineContainSymbol(string line, int startIndex, int endIndex)
     {
+        bool hasSymbol = false;
+        int? gearIndex = null;
         for (int i = startIndex; i < endIndex + 1; ++i)
         {
             if (Symbols.Contains(line[i]))
             {
-                return true;
+                hasSymbol = true;
+                if (line[i] == '*')
+                {
+                    gearIndex = i;
+                }
             }
         }
 
-        return false;
+        return (hasSymbol, gearIndex);
+    }
+
+    private static void AddToExistingOrCreateNewToDictionary(string line, int gearIndex, int numberVal)
+    {
+        if (GearsNearNumbers.ContainsKey((line, gearIndex)))
+        {
+            GearsNearNumbers[(line, gearIndex)].Add(numberVal);
+        }
+        else
+        {
+            GearsNearNumbers.Add((line, gearIndex), new List<int> { numberVal });
+        }
     }
 }

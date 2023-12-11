@@ -14,14 +14,14 @@ public class Day3Tests
     [DataRow("...$.*....", 0, 4)]
     public void DoesAdjacentLineContainSymbols_WithLinesWithSymbols_ReturnsTrue(string line, int startIndex, int endIndex)
     {
-        Assert.IsTrue(Day3.DoesAdjacentLineContainSymbol(line, startIndex, endIndex));
+        Assert.IsTrue(Day3.DoesAdjacentLineContainSymbol(line, startIndex, endIndex).HasSymbol);
     }
 
     [TestMethod]
     [DataRow("..592.....", 5, 9)]
     public void DoesAdjacentLineContainsSymbols_WithLinesWithNoSymbols_ReturnsFalse(string line, int startIndex, int endIndex)
     {
-        Assert.IsFalse(Day3.DoesAdjacentLineContainSymbol(line, startIndex, endIndex));
+        Assert.IsFalse(Day3.DoesAdjacentLineContainSymbol(line, startIndex, endIndex).HasSymbol);
     }
 
     [TestMethod]
