@@ -53,7 +53,7 @@ public class Day1Tests
     [TestMethod]
     public async Task InputFile_AllValues_ContainAtLeastOneNumber()
     {
-        List<string> input = new(await File.ReadAllLinesAsync("day1input.txt").ConfigureAwait(false));
+        List<string> input = new(await File.ReadAllLinesAsync("inputs/day1input.txt").ConfigureAwait(false));
         Assert.IsTrue(Day1.DoAllInputHaveAtLeastOneDigit(input));
     }
 

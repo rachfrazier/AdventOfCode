@@ -17,33 +17,35 @@ Consider your entire calibration document. What is the sum of all of the calibra
  * 
  */
 using AdventOfCode2023;
-using System.Runtime.CompilerServices;
 
 // Day 1
-List<string> dayOneInput = new List<string>(await File.ReadAllLinesAsync("day1input.txt").ConfigureAwait(false));
+//List<string> dayOneInput = new List<string>(await File.ReadAllLinesAsync("inputs/day1input.txt").ConfigureAwait(false));
 
-int GetDayOneSolution(Func<string, (char, char)> partToExecute)
-{
-    int sum = 0;
-    foreach (string line in dayOneInput)
-    {
-        (char First, char Second) result = partToExecute(line);
-        sum += Day1.ConvertDigitsToCombinedNumber(result.First, result.Second);
-    }
+//int GetDayOneSolution(Func<string, (char, char)> partToExecute)
+//{
+//    int sum = 0;
+//    foreach (string line in dayOneInput)
+//    {
+//        (char First, char Second) result = partToExecute(line);
+//        sum += Day1.ConvertDigitsToCombinedNumber(result.First, result.Second);
+//    }
 
-    return sum;
-}
+//    return sum;
+//}
 
-Console.WriteLine($"Final sum for part 1 is {GetDayOneSolution(Day1.ExtractNumbers)}");
-Console.WriteLine($"Final sum for part 2 is {GetDayOneSolution(Day1.ExtractNumbersP2)}");
+//Console.WriteLine($"Final sum for part 1 is {GetDayOneSolution(Day1.ExtractNumbers)}");
+//Console.WriteLine($"Final sum for part 2 is {GetDayOneSolution(Day1.ExtractNumbersP2)}");
 
-// Day 2
-List<string> dayTwoInput = new List<string>(await File.ReadAllLinesAsync("day2input.txt").ConfigureAwait(false));
-Console.WriteLine(Day2.SumIDsOfValidGames(dayTwoInput));
-int partTwoSum = 0;
-List<SetOfCubes> minSetsOfCubes = Day2.GetMinPossibleSetOfCubesPerGame(dayTwoInput);
-foreach (SetOfCubes set in minSetsOfCubes)
-{
-    partTwoSum += (set.Red * set.Green * set.Blue);
-}
-Console.WriteLine($"Sum for part two is {partTwoSum}");
+//// Day 2
+//List<string> dayTwoInput = new List<string>(await File.ReadAllLinesAsync("inputs/day2input.txt").ConfigureAwait(false));
+//Console.WriteLine(Day2.SumIDsOfValidGames(dayTwoInput));
+//int partTwoSum = 0;
+//List<SetOfCubes> minSetsOfCubes = Day2.GetMinPossibleSetOfCubesPerGame(dayTwoInput);
+//foreach (SetOfCubes set in minSetsOfCubes)
+//{
+//    partTwoSum += (set.Red * set.Green * set.Blue);
+//}
+//Console.WriteLine($"Sum for part two is {partTwoSum}");
+
+// Day 3
+Console.WriteLine(Day3.SumPartNumbers(File.ReadLines("inputs/day3input.txt").ToList()));

@@ -8,12 +8,20 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Update="day1input.txt">
+    <None Update="inputs\day1input.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="day2input.txt">
+    <None Update="inputs\day2input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="inputs\day3input.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 
+	<ItemGroup>
+		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+			<_Parameter1>AdventOfCodeTests</_Parameter1>
+		</AssemblyAttribute>
+	</ItemGroup>
 </Project>
