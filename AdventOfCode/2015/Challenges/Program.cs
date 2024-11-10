@@ -9,4 +9,5 @@
 //Console.WriteLine(Day2.SolvePartTwo(day2input.Where(i => !string.IsNullOrEmpty(i)).ToList()));
 
 Day3 day3 = new();
-Console.WriteLine(day3.SolvePresentMap(File.ReadAllText("inputs/day3input.txt")));
+//Console.WriteLine(day3.SolvePresentMap(File.ReadAllText("inputs/day3input.txt")));
+Console.WriteLine(day3.SolveRoboSantaPresentMap(File.ReadAllText("inputs/day3input.txt")));

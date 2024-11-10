@@ -54,4 +54,15 @@ public class Day3Tests
 		int actual = day3.SolvePresentMap(input);
 		Assert.AreEqual(expectedCount, actual);
 	}
+
+	[TestMethod]
+	[DataRow("^v", 3)]
+	[DataRow("^>v<", 3)]
+	[DataRow("^v^v^v^v^v", 11)]
+	public void SolveRoboSantaPresentMap_GivenInput_ReturnsCorrectNumberOfHousesVisted(string input, int expectedCount)
+	{
+		Day3 day3 = new();
+		int actual = day3.SolveRoboSantaPresentMap(input);
+		Assert.AreEqual(expectedCount, actual);
+	}
 }
