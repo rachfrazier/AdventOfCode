@@ -1,6 +1,5 @@
 namespace AoC._2024.Tests;
 
-using AoC.Common;
 using AdventOfCode2024;
 using System.Linq;
 
@@ -22,18 +21,6 @@ public class Day1Tests
 	public void TestInit()
 	{
 		this.distanceMeasure = new(input);
-	}
-
-	[TestMethod]
-	[DataRow(18102, 93258)]
-	[DataRow(34171, 50404)]
-	[DataRow(48236, 60718)]
-	public void StringExtensions_Split_ReturnsCorrectNumbers(int first, int second)
-	{
-		string input = $"{first}   {second}";
-		(string actualFirst, string actualSecond) = input.SplitIntoTuple("   ");
-		Assert.AreEqual(first, int.Parse(actualFirst));
-		Assert.AreEqual(second, int.Parse(actualSecond));
 	}
 
 	[TestMethod]
