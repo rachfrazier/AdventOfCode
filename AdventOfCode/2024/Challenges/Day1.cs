@@ -12,6 +12,7 @@ internal class DistanceMeasure
 {
 	internal List<int> firstList = new();
 	internal List<int> secondList = new();
+	internal Dictionary<int, int> similarityScores = new();
 
 	public DistanceMeasure(IEnumerable<string> input)
 	{
@@ -34,5 +35,30 @@ internal class DistanceMeasure
 		}
 
 		return totalDistance;
+	}
+
+	public int FindTotalSimilarityScore()
+	{
+		this.firstList.Sort();
+		this.secondList.Sort();
+
+		int totalScore = 0;
+		for (int i = 0; i < firstList.Count; ++i)
+		{
+			if (!this.similarityScores.ContainsKey(firstList[i]))
+			{
+				this.CalculateAndStoreSimilarityScore(firstList[i]);
+			}
+
+			totalScore += this.similarityScores[firstList[i]];
+		}
+
+		return totalScore;
+	}
+
+	internal void CalculateAndStoreSimilarityScore(int value)
+	{
+		int numberOfOccurences = this.secondList.Where(i => i == value).Count();
+		this.similarityScores.Add(value, numberOfOccurences * value);
 	}
 }
