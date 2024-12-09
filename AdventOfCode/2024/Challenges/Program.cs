@@ -8,4 +8,7 @@ using AdventOfCode2024;
 
 // Day 2
 //Console.WriteLine(new ReportSafetyInspector(File.ReadAllLines("inputs/day2input.txt")).GetTotalSafeLevels());
-Console.WriteLine(new ReportSafetyInspector(File.ReadAllLines("inputs/day2input.txt")).GetTotalSafeLevelsWithProblemDampener());
+//Console.WriteLine(new ReportSafetyInspector(File.ReadAllLines("inputs/day2input.txt")).GetTotalSafeLevelsWithProblemDampener());
+
+// Day 3
+Console.WriteLine(new MultiplerTokenizer(File.ReadAllText("inputs/day3input.txt")).GetSumOfMultipledTokens());
