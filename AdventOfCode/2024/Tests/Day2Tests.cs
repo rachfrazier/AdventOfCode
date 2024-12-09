@@ -87,4 +87,10 @@ public class Day2Tests
 	{
 		Assert.AreEqual(2, this.inspector.GetTotalSafeLevels());
 	}
+
+	[TestMethod]
+	public void GetTotalSafeLevelsWithProblemDampener_GivenInput_ReturnsCorrectNumber()
+	{
+		Assert.AreEqual(4, this.inspector.GetTotalSafeLevelsWithProblemDampener());
+	}
 }

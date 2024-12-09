@@ -1,9 +1,4 @@
 ﻿using AoC.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AdventOfCode2024;
 internal class ReportSafetyInspector
@@ -20,8 +15,7 @@ internal class ReportSafetyInspector
 		int totalSafe = 0;
 		foreach(List<int> report in reports)
 		{
-			if (AreLevelDiffsWithinRange(report) &&
-				(AreAllLevelsDecreasing(report) || AreAllLevelsIncreasing(report)))
+			if (AreLevelsSafe(report))
 			{
 				++totalSafe;
 			}
@@ -29,6 +23,36 @@ internal class ReportSafetyInspector
 
 		return totalSafe;
 	}
+
+	public int GetTotalSafeLevelsWithProblemDampener()
+	{
+		int totalSafe = 0;
+		foreach (List<int> report in reports)
+		{
+			if (AreLevelsSafe(report))
+			{
+				++totalSafe;
+				continue;
+			}
+
+			for (var i = 0; i < report.Count(); i++)
+			{
+				List<int> newReport = new(report);
+				newReport.RemoveAt(i);
+				if (AreLevelsSafe(newReport))
+				{
+					++totalSafe;
+					break;
+				}
+			}
+		}
+
+		return totalSafe;
+	}
+
+	internal bool AreLevelsSafe(List<int> report) =>
+		AreLevelDiffsWithinRange(report) &&
+		(AreAllLevelsDecreasing(report) || AreAllLevelsIncreasing(report));
 
 	internal bool AreAllLevelsIncreasing(List<int> levels)
 	{
@@ -61,7 +85,7 @@ internal class ReportSafetyInspector
 		for (int i = 0; i < levels.Count - 1; ++i)
 		{
 			int diff = Math.Abs(levels[i + 1] - levels[i]);
-			if (diff < 1 || diff > 3)
+			if (!IsWithinRange(diff))
 			{
 				return false;
 			}
@@ -69,4 +93,6 @@ internal class ReportSafetyInspector
 
 		return true;
 	}
+
+	private bool IsWithinRange(int diff) => diff >= 1 && diff <= 3;
 }
