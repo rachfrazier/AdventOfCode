@@ -41,4 +41,13 @@ public class Day3Tests
 	{
 		Assert.AreEqual(99133, this.tokenizer.GetSumOfMultipledTokens());
 	}
+
+	[TestMethod]
+	[DataRow("xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5))", "xmul(2,4)&mul[3,7]!^do()?mul(8,5))")]
+	[DataRow("xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)un?mul(8,5))", "xmul(2,4)&mul[3,7]!^")]
+	public void ParseOutDisabledSegments_GivenInput_ReturnsCorrectParsedString(string input, string expected)
+	{
+		string parsed = this.tokenizer.ParseOutDisabledSegments(input);
+		Assert.AreEqual(expected, parsed);
+	}
 }
