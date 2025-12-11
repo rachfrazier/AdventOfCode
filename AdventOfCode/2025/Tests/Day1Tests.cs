@@ -51,10 +51,18 @@ public class Day1Tests
 	}
 
 	[TestMethod]
-	public void PuzzleSolver_SolveWithTestInput_ReturnsExpectedValue()
+	public void PuzzleSolver_SolveWithTestInputForPart1_ReturnsExpectedValue()
 	{
 		string input = "L68\nL30\nR48\nL5\nR60\nL55\nL1\nL99\nR14\nL82\n";
 		PuzzleSolver solver = new();
 		Assert.AreEqual(expected: 3u, solver.Solve(input));
+	}
+
+	[TestMethod]
+	public void PuzzleSolver_SolveWithTestInputForPart2_ReturnsExpectedValue()
+	{
+		string input = "L68\nL30\nR48\nL5\nR60\nL55\nL1\nL99\nR14\nL82\n";
+		PuzzleSolver solver = new();
+		Assert.AreEqual(expected: 6u, solver.Solve2(input));
 	}
 }

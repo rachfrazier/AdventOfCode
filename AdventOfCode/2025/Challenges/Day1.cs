@@ -30,6 +30,7 @@ internal class SafeDial
 
 	public void RotateLeft(int rotation)
 	{
+		int originalPosition = this.currentPosition;
 		this.currentPosition -= rotation;
 		if (this.currentPosition < MinDialValue) 
 		{
@@ -41,6 +42,42 @@ internal class SafeDial
 		}
 
 		this.CheckIfLandedOnZero();
+	}
+
+	public void RotateLeftP2(int rotation)
+	{
+		for (var i = 1; i <= rotation; i++)
+		{
+			this.currentPosition -= 1;
+
+			if (this.currentPosition < 0)
+			{
+				this.currentPosition = 99;
+			}
+
+			if (this.currentPosition == 0)
+			{
+				this.numRotationsLeftAtZero++;
+			}
+		}
+	}
+
+	public void RotateRightP2(int rotation)
+	{
+		for (var i = 1; i <= rotation; i++)
+		{
+			this.currentPosition += 1;
+
+			if (this.currentPosition > 99)
+			{
+				this.currentPosition = 0;
+			}
+
+			if (this.currentPosition == 0)
+			{
+				this.numRotationsLeftAtZero++;
+			}
+		}
 	}
 
 	private void CheckIfLandedOnZero()
@@ -60,7 +97,7 @@ internal class PuzzleSolver()
 	{
 		List<(string Direction, int Amount)> rotations =
 			input.SplitLinesIntoStringIntVals("\n", new System.Text.RegularExpressions.Regex("[A-Z]"));
-	
+
 		foreach ((string Direction, int Amount) rotation in rotations)
 		{
 			if (rotation.Direction == "L")
@@ -70,6 +107,26 @@ internal class PuzzleSolver()
 			else
 			{
 				safeDial.RotateRight(rotation.Amount);
+			}
+		}
+
+		return safeDial.GetDoorPassword();
+	}
+
+	public uint Solve2(string input)
+	{
+		List<(string Direction, int Amount)> rotations =
+			input.SplitLinesIntoStringIntVals("\n", new System.Text.RegularExpressions.Regex("[A-Z]"));
+	
+		foreach ((string Direction, int Amount) rotation in rotations)
+		{
+			if (rotation.Direction == "L")
+			{
+				safeDial.RotateLeftP2(rotation.Amount);
+			}
+			else
+			{
+				safeDial.RotateRightP2(rotation.Amount);
 			}
 		}
 
