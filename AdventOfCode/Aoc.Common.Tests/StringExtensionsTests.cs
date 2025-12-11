@@ -1,6 +1,7 @@
 namespace AoC.Common.Tests;
 
 using AoC.Common;
+using System.Text.RegularExpressions;
 
 [TestClass]
 public class StringExtensionsTests
@@ -22,5 +23,16 @@ public class StringExtensionsTests
 	{
 		string input = "7 6 4 2 1";
 		Assert.IsTrue(input.ExtractNumbersFromString(" ").SequenceEqual(new List<int> { 7, 6, 4, 2, 1 }));
+	}
+
+	[TestMethod]
+	public void SplitLinesIntoStringIntVals_GivenRegex_SplitsValuesCorrectly()
+	{
+		string input = "L4\nR389";
+		List<(string Text, int Value)> actual = input.SplitLinesIntoStringIntVals("\n", new Regex("[A-Z]"));
+		Assert.AreEqual(actual[0].Text, "L");
+		Assert.AreEqual(actual[0].Value, 4);
+		Assert.AreEqual(actual[1].Text, "R");
+		Assert.AreEqual(actual[1].Value, 389);
 	}
 }
