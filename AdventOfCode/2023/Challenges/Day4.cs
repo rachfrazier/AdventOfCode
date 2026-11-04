@@ -20,26 +20,15 @@ public static class Day4
 
     public static int CaculateTotalScratchCards(List<string> input)
     {
-        int[] dupes = new int[input.Count];
-        for (int i = 0; i < dupes.Length; ++i)
+		int[] dupes = new int[input.Count];
+        Array.Fill(dupes, 1);
+        for (int i = 0; i < input.Count; ++i)
         {
-            dupes[i]++;
-        }
-
-        for(int i = 0; i <input.Count; ++i)
-        {
-            for (int j = 0; j < dupes[i]; ++j)
+            (List<int> WinningNumbers, List<int> ScorecardNumbers) parsedInput = ParseInput(input[i]);
+            IEnumerable<int> matches = parsedInput.WinningNumbers.Intersect(parsedInput.ScorecardNumbers);
+            for (int j = 0; j < matches.Count(); ++j)
             {
-                (List<int> WinningNumbers, List<int> ScorecardNumbers) parsedInput = ParseInput(input[i]);
-                IEnumerable<int> matches = parsedInput.WinningNumbers.Intersect(parsedInput.ScorecardNumbers);
-                for(int k = 0; k < matches.Count(); ++k)
-                {
-                    if (i == dupes.Length - 1)
-                    {
-                        continue;
-                    }
-                    dupes[i + 1 + k]++;
-                }
+                dupes[i + 1 + j] = dupes[i] + dupes[i + j + 1];
             }
         }
 
