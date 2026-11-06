@@ -16,8 +16,9 @@ struct Direction
 class StreetGrid
 {
 public:
-
+	StreetGrid(const std::vector<Direction>& directions);
+	int CalculateShortestPath();
 
 private:
-	std::vector<Direction> directions;
+	const std::vector<Direction>& directions;
 };

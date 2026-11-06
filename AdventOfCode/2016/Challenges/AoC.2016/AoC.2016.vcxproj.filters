@@ -21,6 +21,9 @@
     <ClCompile Include="DirectionParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="StreetGrid.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StreetGrid.h">
