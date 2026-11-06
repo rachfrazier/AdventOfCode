@@ -18,7 +18,7 @@ class StreetGrid
 public:
 	StreetGrid(const std::vector<Direction>& directions);
 	int CalculateShortestPath();
-
+	int CalculateShortestPathToRealBunnyHQ();
 private:
 	const std::vector<Direction>& directions;
 };

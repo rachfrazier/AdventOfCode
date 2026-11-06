@@ -1,42 +1,98 @@
 #include "StreetGrid.h"
+#include "CommonDataObjects.h"
+#include <set>
 
 StreetGrid::StreetGrid(const std::vector<Direction>& directions) : directions(directions) {};
 
 int StreetGrid::CalculateShortestPath()
 {
-	int xPos = 0;
-	int yPos = 0;
+	Point location;
 
 	// 0 - N, 1 - E, 2 - S, 3 - W
-	int direction = 0;
+	int compassDirection = 0;
 
-	Direction previousDirection = directions[0];
-	xPos += previousDirection.turnLeft ? -previousDirection.numberSteps : previousDirection.numberSteps;
-	direction = previousDirection.turnLeft ? (direction + 3) % 4 : (direction + 1) % 4;
-
-	for (int i = 1; i < directions.size(); ++i)
+	Direction previousDirection;
+	int i = 0;
+	do
 	{
-		switch (direction)
+		switch (compassDirection)
 		{
 		case 0:
-			xPos += directions[i].turnLeft ? -directions[i].numberSteps : directions[i].numberSteps;
+			location.x += this->directions[i].turnLeft ? -this->directions[i].numberSteps : this->directions[i].numberSteps;
 			break;
 		case 1:
-			yPos += directions[i].turnLeft ? directions[i].numberSteps : -directions[i].numberSteps;
+			location.y += this->directions[i].turnLeft ? this->directions[i].numberSteps : -this->directions[i].numberSteps;
 			break;
 		case 2:
-			xPos += directions[i].turnLeft ? directions[i].numberSteps : -directions[i].numberSteps;
+			location.x += this->directions[i].turnLeft ? this->directions[i].numberSteps : -this->directions[i].numberSteps;
 			break;
 		case 3:
-			yPos += directions[i].turnLeft ? -directions[i].numberSteps : directions[i].numberSteps;
+			location.y += this->directions[i].turnLeft ? -this->directions[i].numberSteps : this->directions[i].numberSteps;
 			break;
 		default:
 			break;
 		}
 
-		previousDirection = directions[i];
-		direction = previousDirection.turnLeft ? (direction + 3) % 4 : (direction + 1) % 4;
-	}
+		previousDirection = this->directions[i];
+		compassDirection = previousDirection.turnLeft ? (compassDirection + 3) % 4 : (compassDirection + 1) % 4;
+	} while (++i < directions.size());
 
-	return std::abs(xPos) + std::abs(yPos);
+	return std::abs(location.x) + std::abs(location.y);
+}
+
+void WalkThePath(Point& hqLocation, std::set<Point>& visitedLocations, const Direction& direction, bool& foundDupe, int compassDir)
+{
+	for (int x = 0; x < direction.numberSteps; ++x)
+	{
+		switch (compassDir)
+		{
+		case 0:
+			hqLocation.x += direction.turnLeft ? -1 : 1;
+			break;
+		case 1:
+			hqLocation.y += direction.turnLeft ? 1 : -1;
+			break;
+		case 2:
+			hqLocation.x += direction.turnLeft ? 1 : -1;
+			break;
+		case 3:
+			hqLocation.y += direction.turnLeft ? -1 : 1;
+			break;
+		default:
+			break;
+		}
+
+		if (!(visitedLocations.insert(hqLocation).second))
+		{
+			foundDupe = true;
+			break;
+		}
+	}
+}
+
+int StreetGrid::CalculateShortestPathToRealBunnyHQ()
+{
+	Point hqLocation;
+	std::set<Point> visitedLocations;
+	visitedLocations.insert(hqLocation);
+
+	// 0 - N, 1 - E, 2 - S, 3 - W
+	int compassDirection = 0;
+
+	Direction previousDirection;
+	bool foundDupe = false;
+	int i = 0;
+	do
+	{
+		WalkThePath(hqLocation, visitedLocations, directions[i], foundDupe, compassDirection);
+		if (foundDupe)
+		{
+			break;
+		}
+
+		previousDirection = this->directions[i];
+		compassDirection = previousDirection.turnLeft ? (compassDirection + 3) % 4 : (compassDirection + 1) % 4;
+	} while (++i < directions.size());
+
+	return std::abs(hqLocation.x) + std::abs(hqLocation.y);
 }

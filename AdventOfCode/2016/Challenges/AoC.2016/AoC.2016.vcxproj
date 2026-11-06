@@ -149,6 +149,7 @@
     <ClCompile Include="StreetGrid.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CommonDataObjects.h" />
     <ClInclude Include="DirectionParser.h" />
     <ClInclude Include="StreetGrid.h" />
   </ItemGroup>

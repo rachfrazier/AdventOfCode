@@ -62,6 +62,16 @@ INSTANTIATE_TEST_CASE_P(
 		StreetGridTestData{ AdventOfCode::CY2016::TestData::thirdRoute, 12 })
 );
 
+TEST(CalculateShortestPathToRealBunnyHQ_GivenValidData_CalculatesCorrectDistance)
+{
+	StreetGridTestData data{ { { false, 8 },{ false, 4 },{ false, 4 },{ false, 8 } }, 4 };
+
+	StreetGrid streetGrid(data.directions);
+	int actualPath = streetGrid.CalculateShortestPathToRealBunnyHQ();
+	EXPECT_EQ(actualPath, data.expectedPathDistance);
+}
+
+
 int main(int argc, char** argv)
 {
 	testing::InitGoogleTest(&argc, argv);
