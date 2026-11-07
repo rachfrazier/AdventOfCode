@@ -2,6 +2,7 @@
 
 #include <fstream>
 #include <sstream>
+#include "InputParser.h"
 
 std::string DirectionParser::ReadInput()
 {
@@ -22,7 +23,7 @@ std::vector<Direction> DirectionParser::ParseInputForDirections(const std::strin
 	std::istringstream lineSegment(input);
 	for (std::string line; std::getline(lineSegment, line, ',');)
 	{
-		TrimWhitespace(line);
+		AdventOfCode::Common::InputParser::TrimWhitespace(line);
 
 		Direction direction;
 		if (line[0] == 'R')
@@ -35,13 +36,4 @@ std::vector<Direction> DirectionParser::ParseInputForDirections(const std::strin
 	}
 
 	return directions;
-}
-
-void DirectionParser::TrimWhitespace(std::string& line)
-{
-	size_t whiteSpacePos = line.find(' ');
-	if (whiteSpacePos != std::string::npos)
-	{
-		line.erase(line.begin());
-	}
 }

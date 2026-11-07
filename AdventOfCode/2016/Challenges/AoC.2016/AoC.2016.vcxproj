@@ -145,12 +145,16 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="InputParser.cpp" />
+    <ClCompile Include="KeyPadSolver.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="StreetGrid.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CommonDataObjects.h" />
     <ClInclude Include="DirectionParser.h" />
+    <ClInclude Include="InputParser.h" />
+    <ClInclude Include="KeyPadSolver.h" />
     <ClInclude Include="StreetGrid.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
