@@ -8,9 +8,8 @@ namespace AdventOfCode::CY2016::Tests::Day2
 	class KeyPadSolverTest : public ::testing::Test
 	{
 	protected:
-		KeyPadSolverTest()
+		KeyPadSolverTest() : keypadSolver(this->input)
 		{
-			this->keypadSolver(this->input);
 		}
 
 		std::vector<std::string> input =
