@@ -39,3 +39,43 @@ std::string KeyPadSolver::FindBathroomCode()
 
 	return code.str();
 }
+
+std::string KeyPadSolver::FindFancyBathroomCode()
+{
+	std::stringstream code;
+	Grid2D currentPosition{0, 2};
+	
+	for (const std::string& instructionSet : this->instructions)
+	{
+		for (const char instruction : instructionSet)
+		{
+			Grid2D newPosition = currentPosition;
+			switch (instruction)
+			{
+			case 'U':
+				newPosition.row = std::max(0, currentPosition.row - 1);
+				break;
+			case 'D':
+				newPosition.row = std::min(2, currentPosition.row + 1);
+				break;
+			case 'L':
+				newPosition.column = std::max(0, currentPosition.column - 1);
+				break;
+			case 'R':
+				newPosition.column = std::min(2, currentPosition.column + 1);
+				break;
+			default:
+				break;
+			}
+			
+			if (this->keypad[newPosition.row][newPosition.column] != '0')
+			{
+				currentPosition = newPosition;
+			}
+		}
+
+		code.put(this->keypad[currentPosition.row][currentPosition.column]);
+	}
+
+	return code.str();
+}

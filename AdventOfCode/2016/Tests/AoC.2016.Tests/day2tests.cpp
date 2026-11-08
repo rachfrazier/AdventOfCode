@@ -4,8 +4,15 @@
 
 namespace AdventOfCode::CY2016::Tests::Day2
 {
-	TEST(KeyPadSolverTests, FindBathroomCode_GivenTestInput_ReturnsExpectedResult)
+
+	class KeyPadSolverTest : public ::testing::Test
 	{
+	protected:
+		KeyPadSolverTest()
+		{
+			this->keypadSolver(this->input);
+		}
+
 		std::vector<std::string> input =
 		{
 			{ "ULL" },
@@ -14,8 +21,18 @@ namespace AdventOfCode::CY2016::Tests::Day2
 			{ "UUUUD" }
 		};
 
-		KeyPadSolver keypadSolver(input);
+		KeyPadSolver keypadSolver;
+	};
+	
+	TEST_F(KeyPadSolverTest, PartOneTestCase)
+	{
 		std::string actual = keypadSolver.FindBathroomCode();
 		EXPECT_EQ(actual, "1985");
+	}
+	
+	TEST_F(KeyPadSolverTest, PartTwoTestCase)
+	{
+		std::string actual = keypadSolver.FindFancyBathroomCode();
+		EXPECT_EQ(actual, "5DB3");
 	}
 }

@@ -18,6 +18,7 @@ void ExecuteDayTwo()
 	std::vector<std::string> instructions = AdventOfCode::Common::InputParser::GetAllLines("inputs/day2input.txt", '\n');
 	KeyPadSolver keypadSolver(instructions);
 	std::cout << "Bathroom code is " << keypadSolver.FindBathroomCode() << std::endl;
+	std::cout << "Bathroom code for the fancy keypad is " << keypadSolver.FindFancyBathroomCode() << std::endl;
 }
 
 int main(int argc, char** argv)
