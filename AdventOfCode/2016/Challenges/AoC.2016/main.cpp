@@ -3,6 +3,7 @@
 #include "DirectionParser.h"
 #include "InputParser.h"
 #include "KeyPadSolver.h"
+#include "TriangleSolver.h"
 
 void ExecuteDayOne()
 {
@@ -21,6 +22,14 @@ void ExecuteDayTwo()
 	std::cout << "Bathroom code for the fancy keypad is " << keypadSolver.FindFancyBathroomCode() << std::endl;
 }
 
+void ExecuteDayThree()
+{
+	std::vector<std::string> triangleData = AdventOfCode::Common::InputParser::GetAllLines("inputs/day3input.txt", '\n');
+	TriangleSolver triangleSolver(triangleData);
+	std::cout << "Possible triangles: " << triangleSolver.GetPossibleTrianglesCount() << std::endl;
+	std::cout << "Possible vertical triangles: " << triangleSolver.GetPossibleVerticalTrianglesCount() << std::endl;
+}
+
 int main(int argc, char** argv)
 {
 	if (argc > 1)
@@ -32,6 +41,9 @@ int main(int argc, char** argv)
 			break;
 		case '2':
 			ExecuteDayTwo();
+			break;
+		case '3':
+			ExecuteDayThree();
 			break;
 		default:
 			ExecuteDayOne();

@@ -149,6 +149,7 @@
     <ClCompile Include="KeyPadSolver.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="StreetGrid.cpp" />
+    <ClCompile Include="TriangleSolver.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CommonDataObjects.h" />
@@ -156,6 +157,7 @@
     <ClInclude Include="InputParser.h" />
     <ClInclude Include="KeyPadSolver.h" />
     <ClInclude Include="StreetGrid.h" />
+    <ClInclude Include="TriangleSolver.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
