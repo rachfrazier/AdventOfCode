@@ -148,6 +148,7 @@
     <ClCompile Include="InputParser.cpp" />
     <ClCompile Include="KeyPadSolver.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="RoomDecryptor.cpp" />
     <ClCompile Include="StreetGrid.cpp" />
     <ClCompile Include="TriangleSolver.cpp" />
   </ItemGroup>
@@ -156,6 +157,7 @@
     <ClInclude Include="DirectionParser.h" />
     <ClInclude Include="InputParser.h" />
     <ClInclude Include="KeyPadSolver.h" />
+    <ClInclude Include="RoomDecryptor.h" />
     <ClInclude Include="StreetGrid.h" />
     <ClInclude Include="TriangleSolver.h" />
   </ItemGroup>

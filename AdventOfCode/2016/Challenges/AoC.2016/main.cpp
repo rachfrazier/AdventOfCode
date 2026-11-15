@@ -4,6 +4,7 @@
 #include "InputParser.h"
 #include "KeyPadSolver.h"
 #include "TriangleSolver.h"
+#include "RoomDecryptor.h"
 
 void ExecuteDayOne()
 {
@@ -30,6 +31,14 @@ void ExecuteDayThree()
 	std::cout << "Possible vertical triangles: " << triangleSolver.GetPossibleVerticalTrianglesCount() << std::endl;
 }
 
+void ExecuteDayFour()
+{
+	// Not right... value too high
+	std::vector<std::string> roomData = AdventOfCode::Common::InputParser::GetAllLines("inputs/day4input.txt", '\n');
+	RoomDecryptor roomDecryptor(roomData);
+	std::cout << "Sum of sector IDs: " << roomDecryptor.GetSectorIDSumOfRealRooms() << std::endl;
+}
+
 int main(int argc, char** argv)
 {
 	if (argc > 1)
@@ -44,6 +53,9 @@ int main(int argc, char** argv)
 			break;
 		case '3':
 			ExecuteDayThree();
+			break;
+		case '4':
+			ExecuteDayFour();
 			break;
 		default:
 			ExecuteDayOne();
