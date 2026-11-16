@@ -16,7 +16,6 @@ unsigned int RoomDecryptor::GetSectorIDSumOfRealRooms()
 		DecryptedLine decryptedLine = this->DecryptLine(line);
 		if (this->IsValidRoom(decryptedLine))
 		{
-			std::cout << line << std::endl;
 			total += decryptedLine.sectorID;
 		}
 	}
